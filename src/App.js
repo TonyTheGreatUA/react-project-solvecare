@@ -43,19 +43,22 @@ class Component1 extends React.Component {
         lastName: "",
         secretQuestion: "",
         secretAnswer: ""
-      }
+      },
+      form: []
     };
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = (e, firstName, lastName, creditCardNumber) => {
     e.preventDefault();
     if (formValid(this.state)) {
       console.log(`
         First Name: ${this.state.firstName}
         Last Name: ${this.state.lastName}
-        CardNumber: ${this.state.cardNumber}
+        CardNumber: ${this.state.creditCardNumber}
         Expiration Date: ${this.state.expirationDate}
         CVV/CVC: ${this.state.cvv}
+        Secret Question: ${this.state.secretQuestion}
+        Secret Answer: ${this.state.secretAnswer}
       `);
     } else {
       console.error("invalid - error");
@@ -228,7 +231,18 @@ class Component1 extends React.Component {
 
 
 class Component2 extends React.Component {
-
+  render(){
+    return(
+      <div className="wrapper">
+        <div className="form-wrapper2">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    );
+  }
+  
 }
 
 class App extends React.Component {
@@ -237,6 +251,7 @@ class App extends React.Component {
 		return(
 			<div className="App">
         <Component1 />
+        <Component2 />
 			</div>
 		);
   }

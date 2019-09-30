@@ -17,6 +17,15 @@
   background-color: #5cdb95;
 }
 
+.form-wrapper2 {
+  height: 200px;
+  width: 400px;
+  justify-content: flex-start;
+  padding: 20px 40px;
+  border-radius: 10px;
+  background-color: #5cdb95;
+}
+
 form {
   width: 100%;
   display: flex;
