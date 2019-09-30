@@ -1,22 +1,124 @@
-.App {
+.wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #edf5e1;
+}
+
+.form-wrapper {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  border-radius: 10px;
+  background-color: #5cdb95;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h1 {
   text-align: center;
+  font-weight: 3000;
+  width: 100%;
+  color: #05386b;
+  font-weight: lighter;
+  font-family: sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
+label {
+  font-size: 0.8em;
+  margin-bottom: 0.25em;
+  color: #05386b;
+  font-weight: lighter;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+input {
+  padding: 10px 10px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #05386b;
+}
+
+input::placeholder {
+  font-size: 1.2em;
+  font-weight: lighter;
+  color: #05386b;
+}
+
+input.error {
+  border: 2px solid red;
+}
+
+.submitButton {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #ffffff;
 }
 
-.App-link {
-  color: #09d3ac;
+.submitButton button {
+  background-color: #05386b;
+  color: #fff;
+  border: 2px solid #05386b;
+  width: 100%;
+  margin-top: 1em;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
+}
+
+.submitButton button:hover {
+  color: #05386b;
+  background-color: #fff;
+  border: 2px solid #05386b;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.75em;
+  display: relative;
+}
+
+.firstName,
+.lastName,
+.cvv,
+.creditCardNumber,
+.secretQuestion,
+.secretAnswer,
+.expDate {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.firstName,
+.expDate {
+  margin-right: 1%;
+}
+
+.lastName,
+.cvv {
+  margin-left: 1%;
+}
+
+.creditCardNumber,
+.secretAnswer,
+.secretQuestion {
+  width: 100%;
+}
+
+.firstName,
+.lastName,
+.cvv,
+.expDate {
+  width: 49%;
 }
