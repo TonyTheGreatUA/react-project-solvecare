@@ -24,7 +24,6 @@ const formValid = ({ formErrors, ...rest }) => {
   return valid;
 };
 
-
 class Component1 extends React.Component {
   constructor(props){
     super(props);
@@ -37,6 +36,7 @@ class Component1 extends React.Component {
       lastName: null,
       secretQuestion: null,
       secretAnswer: null,
+      isFormInfoVisibile: null,
       formErrors: {
         creditCardNumber: "",
         expirationDate: "",
@@ -51,6 +51,16 @@ class Component1 extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({
+      isFormInfoVisibile: true,
+    },
+      () => {
+        setTimeout(() => {
+          this.setState({isFormInfoVisibile: false})
+        }, 5000);
+      }
+    );
+    
     if (formValid(this.state)) {
       console.log(`
         First Name: ${this.state.firstName}
@@ -65,12 +75,7 @@ class Component1 extends React.Component {
       console.error("invalid - error");
     }
   };
-  showInfo = () => {
-    setTimeout(() => {
-      document.querySelectorAll('.cardInfo').style.display = 'none';
-      return false;
-    }, 5000);
-  }
+
   handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -126,7 +131,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.creditCardNumber.length > 0 ? "error" : null}
-                placeholder="16 digits"
+                placeholder="0000 0000 0000 0000"
                 noValidate
                 name="creditCardNumber"
                 onChange={this.handleChange}
@@ -155,7 +160,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.cvv.length > 0 ? "error" : null}
-                placeholder="3 or 4 digits"
+                placeholder="CVV/CVC"
                 noValidate
                 name="cvv"
                 onChange={this.handleChange}
@@ -228,7 +233,7 @@ class Component1 extends React.Component {
             <div className="submitButton">
               <button onClick={
               ()=>{
-                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber);
+                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber, this.state.isFormInfoVisibile);
               }} type="submit">Submit</button>
             </div>
           </form>
@@ -245,6 +250,7 @@ class Component2 extends React.Component {
     return(
       <div className="wrapper">
         <div className="form-wrapper2">
+          {/*this.state.showResults ? false : true*/}
           <span>Card Info</span>
           <span className="cardInfo">First Name : {this.props.firstName}</span>
           <span className="cardInfo">Last Name : {this.props.lastName}</span>
@@ -260,13 +266,15 @@ class App extends React.Component {
   state ={
     firstName: "",
     lastName: "",
-    creditCardNumber: ""
+    creditCardNumber: "",
+    isFormInfoVisibile: true
   }
-  updateData = (val1, val2, val3) => {
+  updateData = (val1, val2, val3, val4) => {
     this.setState({
       firstName: val1,
       lastName: val2,
-      creditCardNumber: val3
+      creditCardNumber: val3,
+      isFormInfoVisibile: val4
     })
   }
   
@@ -278,6 +286,7 @@ class App extends React.Component {
         firstName={this.state.firstName}
         lastName={this.state.lastName}
         creditCardNumber={this.state.creditCardNumber}
+        isFormInfoVisibile={this.state.isFormInfoVisibile}
         />
 			</div>
 		);
