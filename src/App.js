@@ -36,7 +36,7 @@ class Component1 extends React.Component {
       lastName: null,
       secretQuestion: null,
       secretAnswer: null,
-      isFormInfoVisibile: null,
+      isFormInfoVisible: null,
       enteredWithError: null,
       formErrors: {
         creditCardNumber: "",
@@ -53,11 +53,11 @@ class Component1 extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({
-      isFormInfoVisibile: true,
+      isFormInfoVisible: true,
     },
       () => {
         setTimeout(() => {
-          this.setState({isFormInfoVisibile: false})
+          this.setState({isFormInfoVisible: false})
         }, 5000);
       }
     );
@@ -126,7 +126,7 @@ class Component1 extends React.Component {
       <div className="wrapper">
         <div className="form-wrapper">
           <h1>Credit Card Home Task</h1>
-          <form onSubmit={this.handleSubmit} noValidate>
+          <form onSubmit={this.handleSubmit}  noValidate>
             <div className="creditCardNumber">
               <label htmlFor="creditCardNumber">Credit Card Number</label>
               <input 
