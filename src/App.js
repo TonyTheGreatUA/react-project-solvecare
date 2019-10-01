@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import PropTypes from 'prop-types';
 
 const cardRegex = RegExp(
   /^[0-9]{16}$/
@@ -66,7 +65,12 @@ class Component1 extends React.Component {
       console.error("invalid - error");
     }
   };
-  
+  showInfo = () => {
+    setTimeout(() => {
+      document.querySelectorAll('.cardInfo').style.display = 'none';
+      return false;
+    }, 5000);
+  }
   handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -222,8 +226,9 @@ class Component1 extends React.Component {
             </div>
 
             <div className="submitButton">
-              <button onClick={()=>{
-                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber)
+              <button onClick={
+              ()=>{
+                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber);
               }} type="submit">Submit</button>
             </div>
           </form>
@@ -240,9 +245,10 @@ class Component2 extends React.Component {
     return(
       <div className="wrapper">
         <div className="form-wrapper2">
-          <span>First Name : {this.props.firstName}</span>
-          <span>Last Name : {this.props.lastName}</span>
-          <span>Credit Card : {(this.props.creditCardNumber).substr(this.props.creditCardNumber.length - 4)}</span>
+          <span>Card Info</span>
+          <span className="cardInfo">First Name : {this.props.firstName}</span>
+          <span className="cardInfo">Last Name : {this.props.lastName}</span>
+          <span className="cardInfo">Credit Card : {(this.props.creditCardNumber).substr(this.props.creditCardNumber.length - 4)}</span>
         </div>
       </div>
     );
