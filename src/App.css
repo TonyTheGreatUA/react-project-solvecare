@@ -138,3 +138,7 @@ input.error {
   justify-content: center;
   padding: 16px;
 }
+
+.form-wrapper2 .cardError{
+  display: none;
+}

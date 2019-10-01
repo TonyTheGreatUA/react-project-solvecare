@@ -37,6 +37,7 @@ class Component1 extends React.Component {
       secretQuestion: null,
       secretAnswer: null,
       isFormInfoVisibile: null,
+      enteredWithError: null,
       formErrors: {
         creditCardNumber: "",
         expirationDate: "",
@@ -252,6 +253,7 @@ class Component2 extends React.Component {
         <div className="form-wrapper2">
           {/*this.state.showResults ? false : true*/}
           <span>Card Info</span>
+          <span className="cardError">Error</span>
           <span className="cardInfo">First Name : {this.props.firstName}</span>
           <span className="cardInfo">Last Name : {this.props.lastName}</span>
           <span className="cardInfo">Credit Card : {(this.props.creditCardNumber).substr(this.props.creditCardNumber.length - 4)}</span>
@@ -267,7 +269,8 @@ class App extends React.Component {
     firstName: "",
     lastName: "",
     creditCardNumber: "",
-    isFormInfoVisibile: true
+    isFormInfoVisibile: true,
+    enteredWithError: ""
   }
   updateData = (val1, val2, val3, val4) => {
     this.setState({
