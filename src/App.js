@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import PropTypes from 'prop-types';
 
 const cardRegex = RegExp(
   /^[0-9]{16}$/
@@ -23,6 +24,8 @@ const formValid = ({ formErrors, ...rest }) => {
 
   return valid;
 };
+
+
 class Component1 extends React.Component {
   constructor(props){
     super(props);
@@ -43,12 +46,11 @@ class Component1 extends React.Component {
         lastName: "",
         secretQuestion: "",
         secretAnswer: ""
-      },
-      form: []
+      }
     };
   }
 
-  handleSubmit = (e, firstName, lastName, creditCardNumber) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (formValid(this.state)) {
       console.log(`
@@ -64,7 +66,7 @@ class Component1 extends React.Component {
       console.error("invalid - error");
     }
   };
-
+  
   handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -220,7 +222,9 @@ class Component1 extends React.Component {
             </div>
 
             <div className="submitButton">
-              <button type="submit">Submit</button>
+              <button onClick={()=>{
+                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber)
+              }} type="submit">Submit</button>
             </div>
           </form>
         </div>
@@ -231,13 +235,14 @@ class Component1 extends React.Component {
 
 
 class Component2 extends React.Component {
+  
   render(){
     return(
       <div className="wrapper">
         <div className="form-wrapper2">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span>First Name : {this.props.firstName}</span>
+          <span>Last Name : {this.props.lastName}</span>
+          <span>Credit Card : {(this.props.creditCardNumber).substr(this.props.creditCardNumber.length - 4)}</span>
         </div>
       </div>
     );
@@ -246,12 +251,28 @@ class Component2 extends React.Component {
 }
 
 class App extends React.Component {
+  state ={
+    firstName: "",
+    lastName: "",
+    creditCardNumber: ""
+  }
+  updateData = (val1, val2, val3) => {
+    this.setState({
+      firstName: val1,
+      lastName: val2,
+      creditCardNumber: val3
+    })
+  }
   
   render(){
 		return(
 			<div className="App">
-        <Component1 />
-        <Component2 />
+        <Component1 updateData={this.updateData}/>
+        <Component2 
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        creditCardNumber={this.state.creditCardNumber}
+        />
 			</div>
 		);
   }

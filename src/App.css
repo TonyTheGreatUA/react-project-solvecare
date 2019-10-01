@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:900i&display=swap');
+
 .wrapper {
   height: 100vh;
+  font-family: 'Lato', sans-serif;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -37,15 +40,12 @@ h1 {
   font-weight: 3000;
   width: 100%;
   color: #05386b;
-  font-weight: lighter;
-  font-family: sans-serif;
 }
 
 label {
   font-size: 0.8em;
   margin-bottom: 0.25em;
   color: #05386b;
-  font-weight: lighter;
 }
 
 input {
@@ -57,7 +57,6 @@ input {
 
 input::placeholder {
   font-size: 1.2em;
-  font-weight: lighter;
   color: #05386b;
 }
 
@@ -79,8 +78,6 @@ input.error {
   width: 100%;
   margin-top: 1em;
   padding: 8px 0px;
-  font-size: 1em;
-  font-weight: lighter;
   letter-spacing: 1px;
   margin-bottom: 0.25em;
 }
@@ -130,4 +127,14 @@ input.error {
 .cvv,
 .expDate {
   width: 49%;
+}
+
+.form-wrapper2 span{
+  font-family: 'Lato', sans-serif;
+  color: #05386b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
