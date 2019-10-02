@@ -10,7 +10,7 @@ const cvvRegex = RegExp(
 const expRegex = RegExp(
   /^(0[1-9]|1[0-2])\/?([0-9]{2})$/
 )
-const formValid = ({ formErrors, ...rest }) => {
+const isFormValid = ({ formErrors, ...rest }) => {
   let valid = true;
 
   Object.values(formErrors).forEach(val => {
@@ -36,7 +36,6 @@ class Component1 extends React.Component {
       lastName: null,
       secretQuestion: null,
       secretAnswer: null,
-      isFormInfoVisible: null,
       enteredWithError: null,
       formErrors: {
         creditCardNumber: "",
@@ -52,17 +51,8 @@ class Component1 extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      isFormInfoVisible: true,
-    },
-      () => {
-        setTimeout(() => {
-          this.setState({isFormInfoVisible: false})
-        }, 5000);
-      }
-    );
     
-    if (formValid(this.state)) {
+    if (isFormValid(this.state)) {
       console.log(`
         First Name: ${this.state.firstName}
         Last Name: ${this.state.lastName}
@@ -234,7 +224,7 @@ class Component1 extends React.Component {
             <div className="submitButton">
               <button onClick={
               ()=>{
-                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber, this.state.isFormInfoVisibile);
+                this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber);
               }} type="submit">Submit</button>
             </div>
           </form>
@@ -244,14 +234,18 @@ class Component1 extends React.Component {
   }
 }
 
-
 class Component2 extends React.Component {
-  
+  state = {
+    isFormInfoVisibile: false
+  } 
+
+  componentDidUpdate = () => {
+    
+  }
   render(){
     return(
       <div className="wrapper">
         <div className="form-wrapper2">
-          {/*this.state.showResults ? false : true*/}
           <span>Card Info</span>
           <span className="cardError">Error</span>
           <span className="cardInfo">First Name : {this.props.firstName}</span>
@@ -272,12 +266,11 @@ class App extends React.Component {
     isFormInfoVisibile: true,
     enteredWithError: ""
   }
-  updateData = (val1, val2, val3, val4) => {
+  updateData = (firstName, lastName, creditCardNumber) => {
     this.setState({
-      firstName: val1,
-      lastName: val2,
-      creditCardNumber: val3,
-      isFormInfoVisibile: val4
+      firstName: firstName,
+      lastName: lastName,
+      creditCardNumber: creditCardNumber
     })
   }
   
