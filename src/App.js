@@ -258,7 +258,7 @@ class Component2 extends React.Component {
   } 
 
   componentDidUpdate = () => {
-    
+
   }
   render(){
     return(
