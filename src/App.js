@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import PropTypes from 'prop-types';
 
 const cardRegex = RegExp(
   /^[0-9]{16}$/
@@ -122,7 +123,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.creditCardNumber.length > 0 ? "error" : null}
-                placeholder="0000 0000 0000 0000"
+                placeholder={this.props.creditCardNumber}
                 noValidate
                 name="creditCardNumber"
                 onChange={this.handleChange}
@@ -136,7 +137,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.expirationDate.length > 0 ? "error" : null}
-                placeholder="MM/YY"
+                placeholder={this.props.expirationDate}
                 noValidate
                 name="expirationDate"
                 onChange={this.handleChange}
@@ -151,7 +152,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.cvv.length > 0 ? "error" : null}
-                placeholder="CVV/CVC"
+                placeholder={this.props.cvv}
                 noValidate
                 name="cvv"
                 onChange={this.handleChange}
@@ -166,7 +167,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.firstName.length > 0 ? "error" : null}
-                placeholder="First Name"
+                placeholder={this.props.firstName}
                 noValidate
                 name="firstName"
                 onChange={this.handleChange}
@@ -181,7 +182,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.lastName.length > 0 ? "error" : null}
-                placeholder="Last Name"
+                placeholder={this.props.lastName}
                 noValidate
                 name="lastName"
                 onChange={this.handleChange}
@@ -196,7 +197,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.secretQuestion.length > 0 ? "error" : null}
-                placeholder="Secret Question"
+                placeholder={this.props.secretQuestion}
                 noValidate
                 name="secretQuestion"
                 onChange={this.handleChange}
@@ -211,7 +212,7 @@ class Component1 extends React.Component {
               <input 
                 type="text"
                 className={formErrors.secretAnswer.length > 0 ? "error" : null}
-                placeholder="Secret Answer"
+                placeholder={this.props.secretAnswer}
                 noValidate
                 name="secretAnswer"
                 onChange={this.handleChange}
@@ -233,7 +234,24 @@ class Component1 extends React.Component {
     );
   }
 }
-
+Component1.propTypes = {
+  creditCardNumber: PropTypes.string,
+  expirationDate: PropTypes.string,
+  cvv: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  secretQuestion: PropTypes.string,
+  secretAnswer: PropTypes.string
+}
+Component1.defaultProps = {
+  creditCardNumber: "0000 0000 0000 0000",
+  expirationDate: "MM/YY",
+  cvv: "CVV/CVC",
+  firstName: "Your Name",
+  lastName: "Your Surname",
+  secretQuestion: "Your secret question",
+  secretAnswer: "Your secret answer"
+}
 class Component2 extends React.Component {
   state = {
     isFormInfoVisibile: false
