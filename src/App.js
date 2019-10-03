@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
+import { isFlowBaseAnnotation } from '@babel/types';
 
 const cardRegex = RegExp(
   /^[0-9]{16}$/
@@ -256,19 +257,41 @@ class Component2 extends React.Component {
   state = {
     isFormInfoVisibile: false
   } 
+  startFormTimer = () =>{
+    const timer = setTimeout(() => {
+      this.setState({
+        isFormInfoVisibile: false,
+        timer: false
+      })
+    }, 5000);
 
-  componentDidUpdate = () => {
-
+    this.setState({
+      isFormInfoVisibile: true,
+      timer,
+    })
+  } 
+  componentDidUpdate = (prevProps) => {
+    if( prevProps.firstName === this.props.firstName &&
+        prevProps.lastName === this.props.lastName &&
+        prevProps.creditCardNumber === this.props.creditCardNumber){
+          return;
+        }
+    this.startFormTimer();
   }
   render(){
+    const {firstName, lastName, creditCardNumber} = this.props;
+    const {isFormInfoVisibile} = this.state;
+    if(!isFormInfoVisibile || (!firstName && !lastName && !creditCardNumber)){
+      return null;
+    }
     return(
       <div className="wrapper">
         <div className="form-wrapper2">
           <span>Card Info</span>
           <span className="cardError">Error</span>
-          <span className="cardInfo">First Name : {this.props.firstName}</span>
-          <span className="cardInfo">Last Name : {this.props.lastName}</span>
-          <span className="cardInfo">Credit Card : {(this.props.creditCardNumber).substr(this.props.creditCardNumber.length - 4)}</span>
+          <span className="cardInfo">First Name : {firstName}</span>
+          <span className="cardInfo">Last Name : {lastName}</span>
+          <span className="cardInfo">Credit Card : {(creditCardNumber).substr(this.props.creditCardNumber.length - 4)}</span>
         </div>
       </div>
     );
