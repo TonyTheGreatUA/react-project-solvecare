@@ -52,5 +52,11 @@ class Component2 extends React.Component {
       );
     }
 }
+Component2.propTypes = {
+    isFormInfoVisibile: PropTypes.bool
+}
 
+Component2.defaultProps = {
+    isFormInfoVisibile: false
+}
 export default Component2;
