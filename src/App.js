@@ -1,5 +1,5 @@
+/* eslint-disable */
 //@flow
-
 import React from 'react';
 import './App.css';
 import Component1 from './components/Component1';

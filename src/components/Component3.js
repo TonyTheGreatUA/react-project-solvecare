@@ -1,4 +1,6 @@
+/* eslint-disable */
 //@flow
+
 import React from 'react';
 
 type Props = {
