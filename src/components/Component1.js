@@ -113,7 +113,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.creditCardNumber.length > 0 ? "error" : null}
-                placeholder={this.props.creditCardNumber}
+                placeholder="0000 0000 0000 0000"
                 noValidate
                 name="creditCardNumber"
                 onChange={this.handleChange}
@@ -127,7 +127,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.expirationDate.length > 0 ? "error" : null}
-                placeholder={this.props.expirationDate}
+                placeholder="MM/YY"
                 noValidate
                 name="expirationDate"
                 onChange={this.handleChange}
@@ -142,7 +142,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.cvv.length > 0 ? "error" : null}
-                placeholder={this.props.cvv}
+                placeholder="CVV/CVC"
                 noValidate
                 name="cvv"
                 onChange={this.handleChange}
@@ -157,7 +157,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.firstName.length > 0 ? "error" : null}
-                placeholder={this.props.firstName}
+                placeholder="Your Name"
                 noValidate
                 name="firstName"
                 onChange={this.handleChange}
@@ -172,7 +172,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.lastName.length > 0 ? "error" : null}
-                placeholder={this.props.lastName}
+                placeholder="Your Surname"
                 noValidate
                 name="lastName"
                 onChange={this.handleChange}
@@ -187,7 +187,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.secretQuestion.length > 0 ? "error" : null}
-                placeholder={this.props.secretQuestion}
+                placeholder="Your Secret Question"
                 noValidate
                 name="secretQuestion"
                 onChange={this.handleChange}
@@ -202,7 +202,7 @@ class Component1 extends React.Component<Props, State> {
               <input 
                 type="text"
                 className={formErrors.secretAnswer.length > 0 ? "error" : null}
-                placeholder={this.props.secretAnswer}
+                placeholder="Your Secret Answer"
                 noValidate
                 name="secretAnswer"
                 onChange={this.handleChange}
