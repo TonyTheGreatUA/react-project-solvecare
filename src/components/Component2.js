@@ -1,14 +1,24 @@
+//@flow
+
 import React from 'react';
 import '../styles/Component2View.css';
-import PropTypes from 'prop-types';
 
-class Component2 extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            isFormInfoVisibile: false
-        } 
-    }
+type Props ={
+  firstName: string,
+  lastName: string,
+  creditCardNumber: string,
+  cardType: string
+}
+
+type State ={
+  isFormInfoVisibile: boolean,
+  timer: boolean
+}
+class Component2 extends React.Component<Props, State> {
+    state = {
+      isFormInfoVisibile: false,
+      timer: false
+    } 
     
     startFormTimer = () =>{
       const timer = setTimeout(() => {
@@ -23,7 +33,7 @@ class Component2 extends React.Component {
         timer,
       })
     } 
-    componentDidUpdate = (prevProps) => {
+    componentDidUpdate = (prevProps: Props) => {
       if( prevProps.firstName === this.props.firstName &&
           prevProps.lastName === this.props.lastName &&
           prevProps.creditCardNumber === this.props.creditCardNumber &&
@@ -33,6 +43,7 @@ class Component2 extends React.Component {
       this.startFormTimer();
     }
     render(){
+      console.log('(render) Component2')
       const {firstName, lastName, creditCardNumber, cardType} = this.props;
       const {isFormInfoVisibile} = this.state;
       if(!isFormInfoVisibile || (!firstName && !lastName && !creditCardNumber && !cardType)){
@@ -52,11 +63,5 @@ class Component2 extends React.Component {
       );
     }
 }
-Component2.propTypes = {
-    isFormInfoVisibile: PropTypes.bool
-}
 
-Component2.defaultProps = {
-    isFormInfoVisibile: false
-}
 export default Component2;

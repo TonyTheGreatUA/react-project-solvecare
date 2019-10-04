@@ -1,22 +1,33 @@
+//@flow
+
 import React from 'react';
 import './App.css';
 import Component1 from './components/Component1';
 import Component2 from './components/Component2';
 
-class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state ={
-      firstName: "",
-      lastName: "",
-      creditCardNumber: "",
-      isFormInfoVisibile: true,
-      enteredWithError: "", 
-      cardType: ""
-    }
+type Props = {
+  updateData: (firstName: string, lastName: string, creditCardNumber: string, cardType: string) => void,
+}
+
+type State = {
+  firstName: string,
+  lastName: string,
+  creditCardNumber: string,
+  cardType: string,
+  isFormInfoVisibile: boolean
+}
+class App extends React.Component<Props, State> {
+  state ={
+    firstName: "",
+    lastName: "",
+    creditCardNumber: "",
+    isFormInfoVisibile: true,
+    enteredWithError: "", 
+    cardType: ""
   }
+
   
-  updateData = (firstName, lastName, creditCardNumber, cardType) => {
+  updateData = (firstName: string, lastName: string, creditCardNumber: string, cardType: string) => {
     this.setState({
       firstName: firstName,
       lastName: lastName,
@@ -27,6 +38,7 @@ class App extends React.Component {
 
   
   render(){
+    console.log('(render) App')
 		return(
 			<div className="App">
         <Component1 updateData={this.updateData}/>

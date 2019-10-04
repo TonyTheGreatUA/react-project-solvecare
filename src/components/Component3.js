@@ -1,12 +1,16 @@
+//@flow
 import React from 'react';
-import PropTypes from 'prop-types';
 
-class Component3 extends React.PureComponent {
-    constructor(props){
-      super(props);
-      this.state = {
-        cardType: ""
-      };
+type Props = {
+  creditCardNumber: any,
+  onCardChange: (v1: string) => void
+}
+type State = {
+  cardType: string
+}
+class Component3 extends React.Component<Props, State> {
+    state = {
+      cardType: ''
     }
     
     componentDidMount = () =>{
@@ -16,31 +20,23 @@ class Component3 extends React.PureComponent {
       })
     }
   
-    componentDidUpdate = (prevProps) => {
-      const { creditCardNumber} = this.props;
-  
+    componentDidUpdate = (prevProps: Props) => {
       if (prevProps !== this.props) {
-        this.setState ({
-          cardType: creditCardNumber.slice(15, 19) < 2000 ? "Visa" : "MasterCard"
-        }, () =>{
-            this.props.onCardChange(this.state.cardType);
-        })
+        return
       }
+      const cardType = this.props.creditCardNumber.slice(12, 16) < 2000 ? "Visa" : "MasterCard"
+      
+      this.setState ({cardType})
+      this.props.onCardChange(this.state.cardType)
     }
     
     render(){
+      console.log('(render) Component3')
       return(
         <div>
         </div>
       )
     }
-}
-Component3.propTypes = {
-    creditCardNumber: PropTypes.string,
-    onCardChange: PropTypes.func
-}
-Component3.defaultProps = {
-    creditCardNumber: "0000 0000 0000 0000"
 }
 
 export default Component3;

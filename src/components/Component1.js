@@ -1,6 +1,7 @@
+//@flow
+
 import React from 'react';
 import '../styles/Component1View.css';
-import PropTypes from 'prop-types';
 import Component3 from './Component3';
 
 const cardRegex = RegExp(
@@ -12,46 +13,54 @@ const cvvRegex = RegExp(
 const expRegex = RegExp(
   /^(0[1-9]|1[0-2])\/?([0-9]{2})$/
 )
+type Props ={
+  updateData: (firstName: string, lastName: string, creditCardNumber: string, cardType: string) => void,
+}
 
-class Component1 extends React.Component {
-  constructor(props){
-    super(props);
+type State ={
+  cardType: string,
+  creditCardNumber: string,
+  formErrors: any,
+  firstName: string,
+  lastName: string,
+}
 
-    this.state = {
+class Component1 extends React.Component<Props, State> {
+  state = {
+    creditCardNumber: "",
+    cvv: "",
+    expirationDate: "",
+    firstName: "",
+    lastName: "",
+    secretQuestion: "",
+    secretAnswer: "",
+    enteredWithError: "",
+    cardType: "",
+    formErrors: {
       creditCardNumber: "",
-      cvv: null,
-      expirationDate: null,
-      firstName: null,
-      lastName: null,
-      secretQuestion: null,
-      secretAnswer: null,
-      enteredWithError: null,
-      cardType: null,
-      formErrors: {
-        creditCardNumber: "",
-        expirationDate: "",
-        cvv: "",
-        firstName: "",
-        lastName: "",
-        secretQuestion: "",
-        secretAnswer: ""
-      }
-    };
+      expirationDate: "",
+      cvv: "",
+      firstName: "",
+      lastName: "",
+      secretQuestion: "",
+      secretAnswer: ""
+    }
   }
-  updateCardType = (cardType) => {
+
+  updateCardType = (cardType: string) => {
     this.setState({
       cardType: cardType
     })
   };
   
-  handleSubmit = (e) => {
+  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
     this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber, this.state.cardType);;
   };
 
-  handleChange = (e) => {
+  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const { name, value } = e.target;
+    const { name, value } = e.currentTarget;
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
@@ -93,6 +102,7 @@ class Component1 extends React.Component {
   };
   render(){
     const { formErrors } = this.state;
+    console.log('(render) Component1')
     return(
       <div className="wrapper">
         <div className="form-wrapper">
@@ -212,24 +222,6 @@ class Component1 extends React.Component {
     );
   }
 }
-Component1.propTypes = {
-  creditCardNumber: PropTypes.string,
-  expirationDate: PropTypes.string,
-  cvv: PropTypes.string,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  secretQuestion: PropTypes.string,
-  secretAnswer: PropTypes.string,
-  onCardChange: PropTypes.func,
-}
-Component1.defaultProps = {
-  creditCardNumber: "0000 0000 0000 0000",
-  expirationDate: "MM/YY",
-  cvv: "CVV/CVC",
-  firstName: "Your Name",
-  lastName: "Your Surname",
-  secretQuestion: "Your secret question",
-  secretAnswer: "Your secret answer"
-}
+
 
 export default Component1;
