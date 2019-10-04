@@ -5,20 +5,19 @@ import React from 'react';
 import '../styles/Component1View.css';
 import Component3 from './Component3';
 
-const cardRegex = RegExp(
-  /^[0-9]{16}$/
-);
-const cvvRegex = RegExp(
-  /^[0-9]{3,4}$/
-);
-const expRegex = RegExp(
-  /^(0[1-9]|1[0-2])\/?([0-9]{2})$/
-)
-type Props ={
-  updateData: (firstName: string, lastName: string, creditCardNumber: string, cardType: string) => void,
-}
+const cardRegex = RegExp(/^[0-9]{16}$/);
+const cvvRegex = RegExp(/^[0-9]{3,4}$/);
+const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
+type Props = {
+  updateData: (
+    firstName: string,
+    lastName: string,
+    creditCardNumber: string,
+    cardType: string,
+  ) => void,
+};
 
-type State ={
+type State = {
   cardType: string,
   creditCardNumber: string,
   formErrors: any,
@@ -27,40 +26,45 @@ type State ={
   cvv: string,
   expirationDate: string,
   secretQuestion: string,
-  secretAnswer: string
-}
+  secretAnswer: string,
+};
 
 class Component1 extends React.Component<Props, State> {
   state = {
-    creditCardNumber: "",
-    cvv: "",
-    expirationDate: "",
-    firstName: "",
-    lastName: "",
-    secretQuestion: "",
-    secretAnswer: "",
-    enteredWithError: "",
-    cardType: "",
+    creditCardNumber: '',
+    cvv: '',
+    expirationDate: '',
+    firstName: '',
+    lastName: '',
+    secretQuestion: '',
+    secretAnswer: '',
+    enteredWithError: '',
+    cardType: '',
     formErrors: {
-      creditCardNumber: "",
-      expirationDate: "",
-      cvv: "",
-      firstName: "",
-      lastName: "",
-      secretQuestion: "",
-      secretAnswer: ""
-    }
-  }
+      creditCardNumber: '',
+      expirationDate: '',
+      cvv: '',
+      firstName: '',
+      lastName: '',
+      secretQuestion: '',
+      secretAnswer: '',
+    },
+  };
 
   updateCardType = (cardType: string) => {
     this.setState({
-      cardType: cardType
-    })
+      cardType: cardType,
+    });
   };
-  
+
   handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
-    this.props.updateData(this.state.firstName, this.state.lastName, this.state.creditCardNumber, this.state.cardType);;
+    this.props.updateData(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.creditCardNumber,
+      this.state.cardType,
+    );
   };
 
   handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
@@ -69,55 +73,45 @@ class Component1 extends React.Component<Props, State> {
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
-      case "firstName":
-        formErrors.firstName =
-          value.length < 3 ? "minimum 3 characaters required" : "";
+      case 'firstName':
+        formErrors.firstName = value.length < 3 ? 'minimum 3 characaters required' : '';
         break;
-      case "lastName":
-        formErrors.lastName =
-          value.length < 3 ? "minimum 3 characaters required" : "";
+      case 'lastName':
+        formErrors.lastName = value.length < 3 ? 'minimum 3 characaters required' : '';
         break;
-      case "secretQuestion":
-        formErrors.secretQuestion =
-          value.length < 10 ? "minimum 10 characaters required" : "";
+      case 'secretQuestion':
+        formErrors.secretQuestion = value.length < 10 ? 'minimum 10 characaters required' : '';
         break;
-      case "secretAnswer":
-        formErrors.secretAnswer =
-          value.length < 10 ? "minimum 10 characaters required" : "";
+      case 'secretAnswer':
+        formErrors.secretAnswer = value.length < 10 ? 'minimum 10 characaters required' : '';
         break;
-      case "creditCardNumber":
-        formErrors.creditCardNumber = cardRegex.test(value)
-          ? ""
-          : "invalid card number";
+      case 'creditCardNumber':
+        formErrors.creditCardNumber = cardRegex.test(value) ? '' : 'invalid card number';
         break;
-      case "cvv":
-        formErrors.cvv = cvvRegex.test(value)
-          ? ""
-          : "invalid CVV/CVC";
+      case 'cvv':
+        formErrors.cvv = cvvRegex.test(value) ? '' : 'invalid CVV/CVC';
         break;
-      case "expirationDate":
-        formErrors.expirationDate = expRegex.test(value)
-          ? ""
-          : "invalid MM/YY";
+      case 'expirationDate':
+        formErrors.expirationDate = expRegex.test(value) ? '' : 'invalid MM/YY';
         break;
       default:
         break;
     }
     this.setState({ formErrors, [name]: value });
   };
-  render(){
+  render() {
     const { formErrors } = this.state;
-    console.log('(render) Component1')
-    return(
+    console.log('(render) Component1');
+    return (
       <div className="wrapper">
         <div className="form-wrapper">
           <h1>Credit Card Home Task</h1>
-          <form onSubmit={this.handleSubmit}  noValidate>
+          <form onSubmit={this.handleSubmit} noValidate>
             <div className="creditCardNumber">
               <label htmlFor="creditCardNumber">Credit Card Number</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.creditCardNumber.length > 0 ? "error" : null}
+                className={formErrors.creditCardNumber.length > 0 ? 'error' : null}
                 placeholder="0000 0000 0000 0000"
                 noValidate
                 name="creditCardNumber"
@@ -129,9 +123,9 @@ class Component1 extends React.Component<Props, State> {
             </div>
             <div className="expDate">
               <label htmlFor="expDate">Expiration Date</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.expirationDate.length > 0 ? "error" : null}
+                className={formErrors.expirationDate.length > 0 ? 'error' : null}
                 placeholder="MM/YY"
                 noValidate
                 name="expirationDate"
@@ -144,24 +138,22 @@ class Component1 extends React.Component<Props, State> {
 
             <div className="cvv">
               <label htmlFor="cvv">CVV/CVC</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.cvv.length > 0 ? "error" : null}
+                className={formErrors.cvv.length > 0 ? 'error' : null}
                 placeholder="CVV/CVC"
                 noValidate
                 name="cvv"
                 onChange={this.handleChange}
               />
-              {formErrors.cvv.length > 0 && (
-                <span className="errorMessage">{formErrors.cvv}</span>
-              )}
+              {formErrors.cvv.length > 0 && <span className="errorMessage">{formErrors.cvv}</span>}
             </div>
 
             <div className="firstName">
               <label htmlFor="firstName">First Name</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.firstName.length > 0 ? "error" : null}
+                className={formErrors.firstName.length > 0 ? 'error' : null}
                 placeholder="Your Name"
                 noValidate
                 name="firstName"
@@ -174,9 +166,9 @@ class Component1 extends React.Component<Props, State> {
 
             <div className="lastName">
               <label htmlFor="lastName">Last Name</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.lastName.length > 0 ? "error" : null}
+                className={formErrors.lastName.length > 0 ? 'error' : null}
                 placeholder="Your Surname"
                 noValidate
                 name="lastName"
@@ -189,9 +181,9 @@ class Component1 extends React.Component<Props, State> {
 
             <div className="secretQuestion">
               <label htmlFor="secretQuestion">Secret Question</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.secretQuestion.length > 0 ? "error" : null}
+                className={formErrors.secretQuestion.length > 0 ? 'error' : null}
                 placeholder="Your Secret Question"
                 noValidate
                 name="secretQuestion"
@@ -204,9 +196,9 @@ class Component1 extends React.Component<Props, State> {
 
             <div className="secretAnswer">
               <label htmlFor="secretAnswer">Secret Answer</label>
-              <input 
+              <input
                 type="text"
-                className={formErrors.secretAnswer.length > 0 ? "error" : null}
+                className={formErrors.secretAnswer.length > 0 ? 'error' : null}
                 placeholder="Your Secret Answer"
                 noValidate
                 name="secretAnswer"
@@ -218,15 +210,19 @@ class Component1 extends React.Component<Props, State> {
             </div>
 
             <div className="submitButton">
-              <button onClick={this.handleSubmit} type="submit">Submit</button>
+              <button onClick={this.handleSubmit} type="submit">
+                Submit
+              </button>
             </div>
-            <Component3 creditCardNumber={this.state.creditCardNumber} onCardChange={this.updateCardType} />
+            <Component3
+              creditCardNumber={this.state.creditCardNumber}
+              onCardChange={this.updateCardType}
+            />
           </form>
         </div>
       </div>
     );
   }
 }
-
 
 export default Component1;
