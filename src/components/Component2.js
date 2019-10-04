@@ -30,8 +30,7 @@ class Component2 extends React.Component<Props, State> {
       }, 5000);
   
       this.setState({
-        isFormInfoVisibile: true,
-        timer,
+        isFormInfoVisibile: true
       })
     } 
     componentDidUpdate = (prevProps: Props) => {

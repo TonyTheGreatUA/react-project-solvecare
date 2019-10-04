@@ -24,6 +24,10 @@ type State ={
   formErrors: any,
   firstName: string,
   lastName: string,
+  cvv: string,
+  expirationDate: string,
+  secretQuestion: string,
+  secretAnswer: string
 }
 
 class Component1 extends React.Component<Props, State> {
