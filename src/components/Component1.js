@@ -37,7 +37,7 @@ type State = {
   secretAnswer: string,
 };
 
-class Component1 extends React.Component<Props, State> {
+class Component1 extends React.PureComponent<Props, State> {
   state = {
     creditCardNumber: '',
     cvv: '',

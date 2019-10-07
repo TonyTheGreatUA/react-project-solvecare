@@ -10,7 +10,7 @@ type Props = {
 type State = {
   cardType: string,
 };
-class Component3 extends React.Component<Props, State> {
+class Component3 extends React.PureComponent<Props, State> {
   state = {
     cardType: '',
   };
