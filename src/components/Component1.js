@@ -16,11 +16,19 @@ type Props = {
     cardType: string,
   ) => void,
 };
-
+type formErrors = {
+  firstName: string,
+  lastName: string,
+  cvv: string,
+  expirationDate: string,
+  secretQuestion: string,
+  secretAnswer: string,
+  creditCardNumber: string,
+};
 type State = {
   cardType: string,
   creditCardNumber: string,
-  formErrors: any,
+  formErrors: formErrors,
   firstName: string,
   lastName: string,
   cvv: string,
