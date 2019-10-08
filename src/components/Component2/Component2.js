@@ -2,7 +2,7 @@
 //@flow
 
 import React from 'react';
-import '../styles/Component2View.css';
+import './Component2View.css';
 
 type Props = {
   firstName: string,

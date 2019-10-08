@@ -2,8 +2,8 @@
 //@flow
 
 import React from 'react';
-import '../styles/Component1View.css';
-import Component3 from './Component3';
+import './Component1View.css';
+import Component3 from '../Component3';
 
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);

@@ -4,7 +4,7 @@
 import React from 'react';
 
 type Props = {
-  creditCardNumber: string,
+  creditCardNumber?: string,
   onCardChange: (cardType: string) => void,
 };
 type State = {
@@ -24,10 +24,10 @@ class Component3 extends React.PureComponent<Props, State> {
 
   componentDidUpdate = (prevProps: Props) => {
     const { creditCardNumber } = this.props;
-    if (prevProps !== this.props) {
+    if (prevProps === this.props && !creditCardNumber) {
       return;
     }
-    const cardType =
+    const cardType: string =
       creditCardNumber && +creditCardNumber.slice(12, 16) < 2000 ? 'Visa' : 'MasterCard';
 
     this.setState({ cardType });
