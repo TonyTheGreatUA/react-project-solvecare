@@ -2,7 +2,7 @@
 //@flow
 
 import React from 'react';
-import './Component1View.css';
+import './Component1.css';
 import Component3 from '../Component3/Component3';
 
 const cardRegex = RegExp(/^[0-9]{16}$/);
