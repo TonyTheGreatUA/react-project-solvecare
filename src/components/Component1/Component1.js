@@ -14,6 +14,7 @@ type Props = {
     lastName: string,
     creditCardNumber: string,
     cardType: string,
+    onFormValid: boolean,
   ) => void,
 };
 
@@ -21,13 +22,13 @@ type State = {
   cardType: string,
   creditCardNumber: string,
   formErrors: {
-    firstName: string,
-    lastName: string,
-    cvv: string,
-    expirationDate: string,
-    secretQuestion: string,
-    secretAnswer: string,
-    creditCardNumber: string,
+    firstName: boolean,
+    lastName: boolean,
+    cvv: boolean,
+    expirationDate: boolean,
+    secretQuestion: boolean,
+    secretAnswer: boolean,
+    creditCardNumber: boolean,
   },
   firstName: string,
   lastName: string,
@@ -35,6 +36,7 @@ type State = {
   expirationDate: string,
   secretQuestion: string,
   secretAnswer: string,
+  onFormValid: boolean,
 };
 
 class Component1 extends React.PureComponent<Props, State> {
@@ -48,14 +50,15 @@ class Component1 extends React.PureComponent<Props, State> {
     secretAnswer: '',
     enteredWithError: '',
     cardType: '',
+    onFormValid: true,
     formErrors: {
-      creditCardNumber: '',
-      expirationDate: '',
-      cvv: '',
-      firstName: '',
-      lastName: '',
-      secretQuestion: '',
-      secretAnswer: '',
+      creditCardNumber: true,
+      expirationDate: true,
+      cvv: true,
+      firstName: true,
+      lastName: true,
+      secretQuestion: true,
+      secretAnswer: true,
     },
   };
 
@@ -67,45 +70,61 @@ class Component1 extends React.PureComponent<Props, State> {
 
   handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
-    this.props.updateData(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.creditCardNumber,
-      this.state.cardType,
-    );
-  };
+    let formErrors = { ...this.state.formErrors };
+    let onFormValid = this.state.onFormValid;
 
-  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const { name, value } = e.currentTarget;
+    for (let i in formErrors) {
+      if (formErrors[i] !== true) {
+        onFormValid = false;
+        this.setState({ onFormValid: onFormValid });
+      }
+    }
+    this.setState({ onFormValid }, () => {
+      this.props.updateData(
+        this.state.firstName,
+        this.state.lastName,
+        this.state.creditCardNumber,
+        this.state.cardType,
+        this.state.onFormValid,
+      );
+    });
+    return true;
+  };
+  onValidation = (name: string, value: string) => {
     let formErrors = { ...this.state.formErrors };
 
     switch (name) {
       case 'firstName':
-        formErrors.firstName = value.length < 3 ? 'minimum 3 characaters required' : '';
+        formErrors.firstName = value.length < 3 ? false : true;
         break;
       case 'lastName':
-        formErrors.lastName = value.length < 3 ? 'minimum 3 characaters required' : '';
+        formErrors.lastName = value.length < 3 ? false : true;
         break;
       case 'secretQuestion':
-        formErrors.secretQuestion = value.length < 10 ? 'minimum 10 characaters required' : '';
+        formErrors.secretQuestion = value.length < 10 ? false : true;
         break;
       case 'secretAnswer':
-        formErrors.secretAnswer = value.length < 10 ? 'minimum 10 characaters required' : '';
+        formErrors.secretAnswer = value.length < 10 ? false : true;
         break;
       case 'creditCardNumber':
-        formErrors.creditCardNumber = cardRegex.test(value) ? '' : 'invalid card number';
+        formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
         break;
       case 'cvv':
-        formErrors.cvv = cvvRegex.test(value) ? '' : 'invalid CVV/CVC';
+        formErrors.cvv = cvvRegex.test(value) ? true : false;
         break;
       case 'expirationDate':
-        formErrors.expirationDate = expRegex.test(value) ? '' : 'invalid MM/YY';
+        formErrors.expirationDate = expRegex.test(value) ? true : false;
         break;
       default:
         break;
     }
     this.setState({ formErrors, [name]: value });
+  };
+  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value }, () => {
+      this.onValidation(name, value);
+    });
   };
   render() {
     const { formErrors } = this.state;
@@ -119,102 +138,83 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="creditCardNumber">Credit Card Number</label>
               <input
                 type="text"
-                className={formErrors.creditCardNumber.length > 0 ? 'error' : null}
+                className={formErrors.creditCardNumber === true ? '' : 'error'}
                 placeholder="0000 0000 0000 0000"
                 noValidate
                 name="creditCardNumber"
                 onChange={this.handleChange}
               />
-              {formErrors.creditCardNumber.length > 0 && (
-                <span className="errorMessage">{formErrors.creditCardNumber}</span>
-              )}
             </div>
             <div className="expDate">
               <label htmlFor="expDate">Expiration Date</label>
               <input
                 type="text"
-                className={formErrors.expirationDate.length > 0 ? 'error' : null}
+                className={formErrors.expirationDate === true ? '' : 'error'}
                 placeholder="MM/YY"
                 noValidate
                 name="expirationDate"
                 onChange={this.handleChange}
               />
-              {formErrors.expirationDate.length > 0 && (
-                <span className="errorMessage">{formErrors.expirationDate}</span>
-              )}
             </div>
 
             <div className="cvv">
               <label htmlFor="cvv">CVV/CVC</label>
               <input
                 type="text"
-                className={formErrors.cvv.length > 0 ? 'error' : null}
+                className={formErrors.cvv === true ? '' : 'error'}
                 placeholder="CVV/CVC"
                 noValidate
                 name="cvv"
                 onChange={this.handleChange}
               />
-              {formErrors.cvv.length > 0 && <span className="errorMessage">{formErrors.cvv}</span>}
             </div>
 
             <div className="firstName">
               <label htmlFor="firstName">First Name</label>
               <input
                 type="text"
-                className={formErrors.firstName.length > 0 ? 'error' : null}
+                className={formErrors.firstName === true ? '' : 'error'}
                 placeholder="Your Name"
                 noValidate
                 name="firstName"
                 onChange={this.handleChange}
               />
-              {formErrors.firstName.length > 0 && (
-                <span className="errorMessage">{formErrors.firstName}</span>
-              )}
             </div>
 
             <div className="lastName">
               <label htmlFor="lastName">Last Name</label>
               <input
                 type="text"
-                className={formErrors.lastName.length > 0 ? 'error' : null}
+                className={formErrors.lastName === true ? '' : 'error'}
                 placeholder="Your Surname"
                 noValidate
                 name="lastName"
                 onChange={this.handleChange}
               />
-              {formErrors.lastName.length > 0 && (
-                <span className="errorMessage">{formErrors.lastName}</span>
-              )}
             </div>
 
             <div className="secretQuestion">
               <label htmlFor="secretQuestion">Secret Question</label>
               <input
                 type="text"
-                className={formErrors.secretQuestion.length > 0 ? 'error' : null}
+                className={formErrors.secretQuestion === true ? '' : 'error'}
                 placeholder="Your Secret Question"
                 noValidate
                 name="secretQuestion"
                 onChange={this.handleChange}
               />
-              {formErrors.secretQuestion.length > 0 && (
-                <span className="errorMessage">{formErrors.secretQuestion}</span>
-              )}
             </div>
 
             <div className="secretAnswer">
               <label htmlFor="secretAnswer">Secret Answer</label>
               <input
                 type="text"
-                className={formErrors.secretAnswer.length > 0 ? 'error' : null}
+                className={formErrors.secretAnswer === true ? '' : 'error'}
                 placeholder="Your Secret Answer"
                 noValidate
                 name="secretAnswer"
                 onChange={this.handleChange}
               />
-              {formErrors.secretAnswer.length > 0 && (
-                <span className="errorMessage">{formErrors.secretAnswer}</span>
-              )}
             </div>
 
             <div className="submitButton">

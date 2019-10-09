@@ -9,6 +9,7 @@ type Props = {
   lastName: string,
   creditCardNumber: string,
   cardType: string,
+  onFormValid: boolean,
 };
 
 type State = {
@@ -51,11 +52,19 @@ class Component2 extends React.Component<Props, State> {
     if (!isFormInfoVisibile || (!firstName && !lastName && !creditCardNumber && !cardType)) {
       return null;
     }
+    if (!this.props.onFormValid) {
+      return (
+        <div className="wrapper">
+          <div className="form-wrapper2">
+            <span>Opps! There is an error.</span>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="wrapper">
         <div className="form-wrapper2">
-          <span>Card Info</span>
-          <span className="cardError">Error</span>
+          <h1>Card Info</h1>
           <span className="cardInfo">First Name : {firstName}</span>
           <span className="cardInfo">Last Name : {lastName}</span>
           <span className="cardInfo">

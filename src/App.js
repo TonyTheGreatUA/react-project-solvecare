@@ -11,6 +11,7 @@ type Props = {
     lastName: string,
     creditCardNumber: string,
     cardType: string,
+    onFormValid: boolean,
   ) => void,
 };
 
@@ -20,6 +21,7 @@ type State = {
   creditCardNumber: string,
   cardType: string,
   isFormInfoVisibile: boolean,
+  onFormValid: boolean,
 };
 class App extends React.Component<Props, State> {
   state = {
@@ -29,6 +31,7 @@ class App extends React.Component<Props, State> {
     isFormInfoVisibile: true,
     enteredWithError: '',
     cardType: '',
+    onFormValid: true,
   };
 
   updateData = (
@@ -36,12 +39,14 @@ class App extends React.Component<Props, State> {
     lastName: string,
     creditCardNumber: string,
     cardType: string,
+    onFormValid: boolean,
   ) => {
     this.setState({
       firstName: firstName,
       lastName: lastName,
       creditCardNumber: creditCardNumber,
       cardType: cardType,
+      onFormValid: onFormValid,
     });
   };
 
@@ -56,6 +61,7 @@ class App extends React.Component<Props, State> {
           creditCardNumber={this.state.creditCardNumber}
           cardType={this.state.cardType}
           isFormInfoVisibile={this.state.isFormInfoVisibile}
+          onFormValid={this.state.onFormValid}
         />
       </div>
     );

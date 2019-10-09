@@ -60,7 +60,7 @@ input::placeholder {
   color: #05386b;
 }
 
-input.error {
+.error {
   border: 2px solid red;
 }
 
