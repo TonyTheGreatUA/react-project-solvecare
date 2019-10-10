@@ -4,7 +4,25 @@
 import React from 'react';
 import './Component1.css';
 import Component3 from '../Component3/Component3';
-
+import {
+  faCreditCard,
+  faUser,
+  faCalendarAlt,
+  faLock,
+  faQuestion,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+const creditCardIcon = <FontAwesomeIcon icon={faCreditCard} />;
+const nameIcon = <FontAwesomeIcon icon={faUser} />;
+const expDateIcon = <FontAwesomeIcon icon={faCalendarAlt} />;
+const cvvIcon = <FontAwesomeIcon icon={faLock} />;
+const questionIcon = <FontAwesomeIcon icon={faQuestion} />;
+var style = {
+  width: 185,
+};
+var style2 = {
+  width: 391,
+};
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
@@ -138,6 +156,7 @@ class Component1 extends React.PureComponent<Props, State> {
           <form onSubmit={this.handleSubmit}>
             <div className="creditCardNumber">
               <label htmlFor="creditCardNumber">Credit Card Number</label>
+              <i className="icon">{creditCardIcon}</i>
               <input
                 type="text"
                 className={
@@ -151,10 +170,12 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="creditCardNumber"
                 onChange={this.handleChange}
                 required
+                style={style2}
               />
             </div>
             <div className="expDate">
               <label htmlFor="expDate">Expiration Date</label>
+              <i className="icon">{expDateIcon}</i>
               <input
                 type="text"
                 className={
@@ -168,13 +189,16 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="expirationDate"
                 onChange={this.handleChange}
                 required
+                style={style}
               />
+              <i className="far fa-credit-card"></i>
             </div>
 
             <div className="cvv">
               <label htmlFor="cvv">CVV/CVC</label>
+              <i className="icon">{cvvIcon}</i>
               <input
-                type="text"
+                type="password"
                 className={
                   !formErrors.cvv && isSubmitted
                     ? 'error'
@@ -186,11 +210,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="cvv"
                 onChange={this.handleChange}
                 required
+                style={style}
               />
             </div>
 
             <div className="firstName">
               <label htmlFor="firstName">First Name</label>
+              <i className="icon">{nameIcon}</i>
               <input
                 type="text"
                 className={
@@ -204,11 +230,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="firstName"
                 onChange={this.handleChange}
                 required
+                style={style}
               />
             </div>
 
             <div className="lastName">
               <label htmlFor="lastName">Last Name</label>
+              <i className="icon">{nameIcon}</i>
               <input
                 type="text"
                 className={
@@ -222,11 +250,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="lastName"
                 onChange={this.handleChange}
                 required
+                style={style}
               />
             </div>
 
             <div className="secretQuestion">
               <label htmlFor="secretQuestion">Secret Question</label>
+              <i className="icon">{questionIcon}</i>
               <input
                 type="text"
                 className={
@@ -240,11 +270,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="secretQuestion"
                 onChange={this.handleChange}
                 required
+                style={style2}
               />
             </div>
 
             <div className="secretAnswer">
               <label htmlFor="secretAnswer">Secret Answer</label>
+              <i className="icon">{questionIcon}</i>
               <input
                 type="text"
                 className={
@@ -258,6 +290,7 @@ class Component1 extends React.PureComponent<Props, State> {
                 name="secretAnswer"
                 onChange={this.handleChange}
                 required
+                style={style2}
               />
             </div>
 

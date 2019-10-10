@@ -1,14 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:900i&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Ubuntu');
+input {
+  padding: 8px 0px 8px 12px;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #dddddd;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+  outline: none;
+  font-size: 16px;
+  color: #555555;
+}
 .wrapper {
   height: 100vh;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #edf5e1;
+  background-color: #5cdb95;
 }
 
 .form-wrapper {
@@ -17,7 +28,7 @@
   flex-direction: column;
   padding: 20px 40px;
   border-radius: 10px;
-  background-color: #5cdb95;
+  background-color: #f8f8f8;
 }
 
 .form-wrapper2 {
@@ -26,7 +37,7 @@
   justify-content: flex-start;
   padding: 20px 40px;
   border-radius: 10px;
-  background-color: #5cdb95;
+  background-color: #f8f8f8;
 }
 
 form {
@@ -47,8 +58,12 @@ label {
   margin-bottom: 0.25em;
   color: #05386b;
 }
-
-input {
+.icon > svg {
+  position: absolute;
+  padding: 12px;
+  color: #555555;
+}
+/*input {
   padding: 10px 10px;
   border-radius: 5px;
   outline: none;
@@ -58,10 +73,10 @@ input {
 input::placeholder {
   font-size: 1.2em;
   color: #05386b;
-}
+}*/
 
 .error {
-  border: 2px solid red;
+  border: 2px solid rgb(253, 102, 102);
 }
 
 .submitButton {
@@ -80,6 +95,8 @@ input::placeholder {
   padding: 8px 0px;
   letter-spacing: 1px;
   margin-bottom: 0.25em;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .submitButton button:hover {
