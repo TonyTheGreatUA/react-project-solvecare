@@ -1,5 +1,7 @@
 Credit Card Form Validation
 
+If something is entered wrong, than you'll get an error message in second.
+If everything is entered right, than you'll get 4 last digits of card, owner details and card type(visa/mastercard)
 #### Requirements
 
 - All fields are required
@@ -8,8 +10,7 @@ Credit Card Form Validation
 - MM/YY data type
 - At least 3 characters at first and last name
 - At least 10 characters at secret question and answer
- If something is entered wrong, than you'll get an error message in second.
- If everything is entered right, than you'll get 4 last digits of card, owner details and card type(visa/mastercard)
+
  
 ```javascript
 
