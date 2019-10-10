@@ -54,13 +54,13 @@ class Component1 extends React.PureComponent<Props, State> {
     onFormValid: true,
     isSubmitted: false,
     formErrors: {
-      creditCardNumber: true,
-      expirationDate: true,
-      cvv: true,
-      firstName: true,
-      lastName: true,
-      secretQuestion: true,
-      secretAnswer: true,
+      creditCardNumber: false,
+      expirationDate: false,
+      cvv: false,
+      firstName: false,
+      lastName: false,
+      secretQuestion: false,
+      secretAnswer: false,
     },
   };
 
@@ -135,7 +135,7 @@ class Component1 extends React.PureComponent<Props, State> {
       <div className="wrapper">
         <div className="form-wrapper">
           <h1>Credit Card Home Task</h1>
-          <form onSubmit={this.handleSubmit} noValidate>
+          <form onSubmit={this.handleSubmit}>
             <div className="creditCardNumber">
               <label htmlFor="creditCardNumber">Credit Card Number</label>
               <input
@@ -148,9 +148,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="0000 0000 0000 0000"
-                noValidate
                 name="creditCardNumber"
                 onChange={this.handleChange}
+                required
               />
             </div>
             <div className="expDate">
@@ -165,9 +165,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="MM/YY"
-                noValidate
                 name="expirationDate"
                 onChange={this.handleChange}
+                required
               />
             </div>
 
@@ -183,9 +183,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="CVV/CVC"
-                noValidate
                 name="cvv"
                 onChange={this.handleChange}
+                required
               />
             </div>
 
@@ -201,9 +201,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="Your Name"
-                noValidate
                 name="firstName"
                 onChange={this.handleChange}
+                required
               />
             </div>
 
@@ -219,9 +219,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="Your Surname"
-                noValidate
                 name="lastName"
                 onChange={this.handleChange}
+                required
               />
             </div>
 
@@ -237,9 +237,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="Your Secret Question"
-                noValidate
                 name="secretQuestion"
                 onChange={this.handleChange}
+                required
               />
             </div>
 
@@ -255,9 +255,9 @@ class Component1 extends React.PureComponent<Props, State> {
                     : ''
                 }
                 placeholder="Your Secret Answer"
-                noValidate
                 name="secretAnswer"
                 onChange={this.handleChange}
+                required
               />
             </div>
 
