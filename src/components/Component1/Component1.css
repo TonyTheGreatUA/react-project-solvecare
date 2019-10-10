@@ -92,6 +92,7 @@ input::placeholder {
   border: 2px solid #05386b;
   width: 100%;
   margin-top: 1em;
+  margin-left: 5px;
   padding: 8px 0px;
   letter-spacing: 1px;
   margin-bottom: 0.25em;

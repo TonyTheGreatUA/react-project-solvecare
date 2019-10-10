@@ -69,7 +69,7 @@ class Component1 extends React.PureComponent<Props, State> {
     secretAnswer: '',
     enteredWithError: '',
     cardType: '',
-    onFormValid: true,
+    onFormValid: false,
     isSubmitted: false,
     formErrors: {
       creditCardNumber: false,

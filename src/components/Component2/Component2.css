@@ -11,3 +11,8 @@
 .form-wrapper2 .cardError {
   display: none;
 }
+.errorMsg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

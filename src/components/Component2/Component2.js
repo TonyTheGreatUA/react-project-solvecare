@@ -56,7 +56,7 @@ class Component2 extends React.Component<Props, State> {
       return (
         <div className="wrapper">
           <div className="form-wrapper2">
-            <span>Opps! There is an error.</span>
+            <span className="errorMsg">Opps! There is an error.</span>
           </div>
         </div>
       );
