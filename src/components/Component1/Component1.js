@@ -37,6 +37,7 @@ type State = {
   secretQuestion: string,
   secretAnswer: string,
   onFormValid: boolean,
+  isSubmitted: boolean,
 };
 
 class Component1 extends React.PureComponent<Props, State> {
@@ -51,6 +52,7 @@ class Component1 extends React.PureComponent<Props, State> {
     enteredWithError: '',
     cardType: '',
     onFormValid: true,
+    isSubmitted: false,
     formErrors: {
       creditCardNumber: true,
       expirationDate: true,
@@ -79,7 +81,7 @@ class Component1 extends React.PureComponent<Props, State> {
         this.setState({ onFormValid: onFormValid });
       }
     }
-    this.setState({ onFormValid }, () => {
+    this.setState({ onFormValid, isSubmitted: true }, () => {
       this.props.updateData(
         this.state.firstName,
         this.state.lastName,
@@ -127,7 +129,7 @@ class Component1 extends React.PureComponent<Props, State> {
     });
   };
   render() {
-    const { formErrors } = this.state;
+    const { formErrors, isSubmitted } = this.state;
     console.log('(render) Component1');
     return (
       <div className="wrapper">
@@ -138,7 +140,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="creditCardNumber">Credit Card Number</label>
               <input
                 type="text"
-                className={formErrors.creditCardNumber === true ? '' : 'error'}
+                className={
+                  !formErrors.creditCardNumber && isSubmitted
+                    ? 'error'
+                    : formErrors.creditCardNumber && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="0000 0000 0000 0000"
                 noValidate
                 name="creditCardNumber"
@@ -149,7 +157,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="expDate">Expiration Date</label>
               <input
                 type="text"
-                className={formErrors.expirationDate === true ? '' : 'error'}
+                className={
+                  !formErrors.expirationDate && isSubmitted
+                    ? 'error'
+                    : formErrors.expirationDate && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="MM/YY"
                 noValidate
                 name="expirationDate"
@@ -161,7 +175,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="cvv">CVV/CVC</label>
               <input
                 type="text"
-                className={formErrors.cvv === true ? '' : 'error'}
+                className={
+                  !formErrors.cvv && isSubmitted
+                    ? 'error'
+                    : formErrors.cvv && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="CVV/CVC"
                 noValidate
                 name="cvv"
@@ -173,7 +193,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="firstName">First Name</label>
               <input
                 type="text"
-                className={formErrors.firstName === true ? '' : 'error'}
+                className={
+                  !formErrors.firstName && isSubmitted
+                    ? 'error'
+                    : formErrors.firstName && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="Your Name"
                 noValidate
                 name="firstName"
@@ -185,7 +211,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="lastName">Last Name</label>
               <input
                 type="text"
-                className={formErrors.lastName === true ? '' : 'error'}
+                className={
+                  !formErrors.lastName && isSubmitted
+                    ? 'error'
+                    : formErrors.lastName && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="Your Surname"
                 noValidate
                 name="lastName"
@@ -197,7 +229,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="secretQuestion">Secret Question</label>
               <input
                 type="text"
-                className={formErrors.secretQuestion === true ? '' : 'error'}
+                className={
+                  !formErrors.secretQuestion && isSubmitted
+                    ? 'error'
+                    : formErrors.secretQuestion && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="Your Secret Question"
                 noValidate
                 name="secretQuestion"
@@ -209,7 +247,13 @@ class Component1 extends React.PureComponent<Props, State> {
               <label htmlFor="secretAnswer">Secret Answer</label>
               <input
                 type="text"
-                className={formErrors.secretAnswer === true ? '' : 'error'}
+                className={
+                  !formErrors.secretAnswer && isSubmitted
+                    ? 'error'
+                    : formErrors.secretAnswer && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 placeholder="Your Secret Answer"
                 noValidate
                 name="secretAnswer"
