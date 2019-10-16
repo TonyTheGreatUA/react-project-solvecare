@@ -4,7 +4,10 @@ import React from 'react';
 import './App.css';
 import Component1 from './components/Component1/Component1';
 import Component2 from './components/Component2/Component2';
-
+import { createStore } from 'redux';
+import rootReducer from './store/reducers';
+import { Provider } from 'react-redux';
+const store = createStore(rootReducer);
 type Props = {
   updateData: (
     firstName: string,
@@ -23,6 +26,7 @@ type State = {
   isFormInfoVisibile: boolean,
   onFormValid: boolean,
 };
+
 class App extends React.Component<Props, State> {
   state = {
     firstName: '',
@@ -53,17 +57,19 @@ class App extends React.Component<Props, State> {
   render() {
     console.log('(render) App');
     return (
-      <div className="App">
-        <Component1 updateData={this.updateData} />
-        <Component2
-          firstName={this.state.firstName}
-          lastName={this.state.lastName}
-          creditCardNumber={this.state.creditCardNumber}
-          cardType={this.state.cardType}
-          isFormInfoVisibile={this.state.isFormInfoVisibile}
-          onFormValid={this.state.onFormValid}
-        />
-      </div>
+      <Provider store="store">
+        <div className="App">
+          <Component1 updateData={this.updateData} />
+          <Component2
+            firstName={this.state.firstName}
+            lastName={this.state.lastName}
+            creditCardNumber={this.state.creditCardNumber}
+            cardType={this.state.cardType}
+            isFormInfoVisibile={this.state.isFormInfoVisibile}
+            onFormValid={this.state.onFormValid}
+          />
+        </div>
+      </Provider>
     );
   }
 }

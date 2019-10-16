@@ -4,6 +4,7 @@
 import React from 'react';
 import './Component1.css';
 import Component3 from '../Component3/Component3';
+import { createStore } from 'redux';
 import {
   faCreditCard,
   faUser,
@@ -26,6 +27,7 @@ var style2 = {
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
+
 type Props = {
   updateData: (
     firstName: string,
