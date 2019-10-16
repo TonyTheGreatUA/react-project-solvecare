@@ -1,5 +1,7 @@
 Credit Card Form Validation
 
+!!!!! Currently project is getting redesigned with redux !!!!!
+
 If something is entered wrong, than you'll get an error message in second.
 If everything is entered right, than you'll get 4 last digits of card, owner details and card type(visa/mastercard)
 #### Requirements
