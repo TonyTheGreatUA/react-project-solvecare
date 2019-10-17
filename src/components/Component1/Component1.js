@@ -3,7 +3,6 @@
 
 import React from 'react';
 import './Component1.css';
-import Component3 from '../Component3/Component3';
 
 import {
   faCreditCard,
@@ -29,13 +28,20 @@ const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
 
 type Props = {
-  //   updateData: (
-  //     firstName: string,
-  //     lastName: string,
-  //     creditCardNumber: string,
-  //     cardType: string,
-  //     onFormValid: boolean,
-  //   ) => void,
+  creditCardNumber: string,
+  expirationDate: string,
+  cvv: string,
+  firstName: string,
+  lastName: string,
+  secretQuestion: string,
+  secretAnswer: string,
+  setCreditCardNumber: (value: string) => void,
+  setExpirationDate: (value: string) => void,
+  setCVV: (value: string) => void,
+  setFirstName: (value: string) => void,
+  setLastName: (value: string) => void,
+  setSecretQuestion: (value: string) => void,
+  setSecretAnswer: (value: string) => void,
   onCreditCardNumberChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   onCvvChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   onExpirationDateChange: (e: SyntheticEvent<HTMLInputElement>) => void,
@@ -45,27 +51,7 @@ type Props = {
   onSecretAnswerChange: (e: SyntheticEvent<HTMLInputElement>) => void,
 };
 
-type State = {
-  //   cardType: string,
-  //   creditCardNumber: string,
-  //   formErrors: {
-  //     firstName: boolean,
-  //     lastName: boolean,
-  //     cvv: boolean,
-  //     expirationDate: boolean,
-  //     secretQuestion: boolean,
-  //     secretAnswer: boolean,
-  //     creditCardNumber: boolean,
-  //   },
-  //   firstName: string,
-  //   lastName: string,
-  //   cvv: string,
-  //   expirationDate: string,
-  //   secretQuestion: string,
-  //   secretAnswer: string,
-  //   onFormValid: boolean,
-  //   isSubmitted: boolean,
-};
+type State = {};
 
 class Component1 extends React.PureComponent<Props, State> {
   constructor() {
@@ -79,50 +65,34 @@ class Component1 extends React.PureComponent<Props, State> {
     this.onSecretQuestionChange = this.onSecretQuestionChange.bind(this);
     this.onSecretAnswerChange = this.onSecretAnswerChange.bind(this);
   }
+  onCreditCardNumberChange: () => void;
   onCreditCardNumberChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setCreditCardNumber(e.target.value);
+    this.props.setCreditCardNumber(e.currentTarget.value);
   }
+  onExpirationDateChange: () => void;
   onExpirationDateChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setExpirationDate(e.target.value);
+    this.props.setExpirationDate(e.currentTarget.value);
   }
+  onCvvChange: () => void;
   onCvvChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setCVV(e.target.value);
+    this.props.setCVV(e.currentTarget.value);
   }
+  onFirstNameChange: () => void;
   onFirstNameChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setFirstName(e.target.value);
+    this.props.setFirstName(e.currentTarget.value);
   }
+  onLastNameChange: () => void;
   onLastNameChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setLastName(e.target.value);
+    this.props.setLastName(e.currentTarget.value);
   }
+  onSecretQuestionChange: () => void;
   onSecretQuestionChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setSecretQuestion(e.target.value);
+    this.props.setSecretQuestion(e.currentTarget.value);
   }
+  onSecretAnswerChange: () => void;
   onSecretAnswerChange(e: SyntheticEvent<HTMLInputElement>) {
-    this.props.setSecretAnswer(e.target.value);
+    this.props.setSecretAnswer(e.currentTarget.value);
   }
-
-  // state = {
-  //   creditCardNumber: '',
-  //   cvv: '',
-  //   expirationDate: '',
-  //   firstName: '',
-  //   lastName: '',
-  //   secretQuestion: '',
-  //   secretAnswer: '',
-  //   enteredWithError: '',
-  //   cardType: '',
-  //   onFormValid: false,
-  //   isSubmitted: false,
-  //   formErrors: {
-  //     creditCardNumber: false,
-  //     expirationDate: false,
-  //     cvv: false,
-  //     firstName: false,
-  //     lastName: false,
-  //     secretQuestion: false,
-  //     secretAnswer: false,
-  //   },
-  // };
 
   render() {
     return (
@@ -231,10 +201,6 @@ class Component1 extends React.PureComponent<Props, State> {
             <div className="submitButton">
               <button type="submit">Submit</button>
             </div>
-            {/* <Component3
-              creditCardNumber={this.state.creditCardNumber}
-              onCardChange={this.updateCardType}
-            /> */}
           </form>
         </div>
       </div>
