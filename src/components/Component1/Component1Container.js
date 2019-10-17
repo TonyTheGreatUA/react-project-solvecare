@@ -46,13 +46,13 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = {
-  setCreditCardNumber,
-  setCVV,
-  setExpirationDate,
-  setFirstName,
-  setLastName,
-  setSecretQuestion,
-  setSecretAnswer,
+  setCreditCardNumber: setCreditCardNumber,
+  setCVV: setCVV,
+  setExpirationDate: setExpirationDate,
+  setFirstName: setFirstName,
+  setLastName: setLastName,
+  setSecretQuestion: setSecretQuestion,
+  setSecretAnswer: setSecretAnswer,
 };
 
 export default connect(
