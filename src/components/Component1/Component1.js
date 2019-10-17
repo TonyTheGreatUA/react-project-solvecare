@@ -52,11 +52,37 @@ type Props = {
   onSecretAnswerChange: (e: SyntheticEvent<HTMLInputElement>) => void,
 };
 
-type State = {};
+type State = {
+  formErrors: {
+    firstName: boolean,
+    lastName: boolean,
+    cvv: boolean,
+    expirationDate: boolean,
+    secretQuestion: boolean,
+    secretAnswer: boolean,
+    creditCardNumber: boolean,
+  },
+  onFormValid: boolean,
+  isSubmitted: boolean,
+};
 
 class Component1 extends React.PureComponent<Props, State> {
   constructor() {
     super();
+
+    this.state = {
+      onFormValid: true,
+      isSubmitted: false,
+      formErrors: {
+        creditCardNumber: false,
+        expirationDate: false,
+        cvv: false,
+        firstName: false,
+        lastName: false,
+        secretQuestion: false,
+        secretAnswer: false,
+      },
+    };
 
     this.onCreditCardNumberChange = this.onCreditCardNumberChange.bind(this);
     this.onCvvChange = this.onCvvChange.bind(this);
@@ -95,12 +121,65 @@ class Component1 extends React.PureComponent<Props, State> {
     this.props.setSecretAnswer(e.currentTarget.value);
   }
 
+  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    let formErrors = { ...this.state.formErrors };
+    let onFormValid = this.state.onFormValid;
+    for (let i in formErrors) {
+      if (formErrors[i] !== true) {
+        onFormValid = false;
+        this.setState({ onFormValid: onFormValid });
+      }
+    }
+    this.setState({ onFormValid, isSubmitted: true });
+    this.handleChange;
+    return true;
+  };
+
+  onValidation = (name: string, value: string) => {
+    let formErrors = { ...this.state.formErrors };
+    switch (name) {
+      case 'firstName':
+        formErrors.firstName = value.length < 3 ? false : true;
+        break;
+      case 'lastName':
+        formErrors.lastName = value.length < 3 ? false : true;
+        break;
+      case 'secretQuestion':
+        formErrors.secretQuestion = value.length < 10 ? false : true;
+        break;
+      case 'secretAnswer':
+        formErrors.secretAnswer = value.length < 10 ? false : true;
+        break;
+      case 'creditCardNumber':
+        formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
+        break;
+      case 'cvv':
+        formErrors.cvv = cvvRegex.test(value) ? true : false;
+        break;
+      case 'expirationDate':
+        formErrors.expirationDate = expRegex.test(value) ? true : false;
+        break;
+      default:
+        break;
+    }
+    this.setState({ formErrors, [name]: value });
+  };
+
+  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    this.setState(() => {
+      this.onValidation(name, value);
+    });
+  };
+
   render() {
+    const { formErrors, isSubmitted } = this.state;
     return (
       <div className="wrapper">
         <div className="form-wrapper">
           <h1>Credit Card Home Task</h1>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="creditCardNumber">
               <label htmlFor="creditCardNumber">Credit Card Number</label>
               <i className="icon">{creditCardIcon}</i>
@@ -108,6 +187,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 placeholder="0000 0000 0000 0000"
                 name="creditCardNumber"
+                className={
+                  !formErrors.creditCardNumber && isSubmitted
+                    ? 'error'
+                    : formErrors.creditCardNumber && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style2}
                 value={this.props.creditCardNumber}
@@ -121,6 +207,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 placeholder="MM/YY"
                 name="expirationDate"
+                className={
+                  !formErrors.expirationDate && isSubmitted
+                    ? 'error'
+                    : formErrors.expirationDate && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style}
                 value={this.props.expirationDate}
@@ -136,6 +229,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="password"
                 placeholder="CVV/CVC"
                 name="cvv"
+                className={
+                  !formErrors.cvv && isSubmitted
+                    ? 'error'
+                    : formErrors.cvv && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style}
                 value={this.props.cvv}
@@ -150,6 +250,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 placeholder="Your Name"
                 name="firstName"
+                className={
+                  !formErrors.firstName && isSubmitted
+                    ? 'error'
+                    : formErrors.firstName && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style}
                 value={this.props.firstName}
@@ -164,6 +271,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 placeholder="Your Surname"
                 name="lastName"
+                className={
+                  !formErrors.lastName && isSubmitted
+                    ? 'error'
+                    : formErrors.lastName && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style}
                 value={this.props.lastName}
@@ -178,6 +292,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 placeholder="Your Secret Question"
                 name="secretQuestion"
+                className={
+                  !formErrors.secretQuestion && isSubmitted
+                    ? 'error'
+                    : formErrors.secretQuestion && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style2}
                 value={this.props.secretQuestion}
@@ -192,6 +313,13 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 placeholder="Your Secret Answer"
                 name="secretAnswer"
+                className={
+                  !formErrors.secretAnswer && isSubmitted
+                    ? 'error'
+                    : formErrors.secretAnswer && !isSubmitted
+                    ? ''
+                    : ''
+                }
                 required
                 style={style2}
                 value={this.props.secretAnswer}
