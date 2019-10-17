@@ -17,7 +17,6 @@ const defaultState = {
   lastName: '',
   secretQuestion: '',
   secretAnswer: '',
-  enteredWithError: '',
 };
 
 export const formReducer = (state = defaultState, action) => {

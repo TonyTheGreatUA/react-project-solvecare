@@ -11,6 +11,7 @@ import {
   setSecretQuestion,
   setSecretAnswer,
 } from '../../store/form/actions';
+
 class Component1Container extends Component {
   render() {
     return (

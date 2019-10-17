@@ -3,6 +3,7 @@
 
 import React from 'react';
 import './Component1.css';
+import Component3 from '../Component3/Component3';
 
 import {
   faCreditCard,
