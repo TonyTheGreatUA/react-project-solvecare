@@ -125,7 +125,6 @@ class Component1 extends React.PureComponent<Props, State> {
   // };
 
   render() {
-    console.log('(render) Component1');
     return (
       <div className="wrapper">
         <div className="form-wrapper">

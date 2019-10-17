@@ -21,7 +21,6 @@ const defaultState = {
 };
 
 export const formReducer = (state = defaultState, action) => {
-  console.log(state);
   switch (action.type) {
     case FORM_CHANGE_CREDIT_CARD_NUMBER:
       return { ...state, creditCardNumber: action.payload };

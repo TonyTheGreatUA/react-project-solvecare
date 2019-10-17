@@ -20,15 +20,15 @@ class Component1Container extends Component {
         expirationDate={this.props.expirationDate}
         firstName={this.props.firstName}
         lastName={this.props.lastName}
-        secretQuestin={this.props.secretQuestin}
+        secretQuestin={this.props.secretQuestion}
         secretAnswer={this.props.secretAnswer}
-        setCrediCardNumber={this.props.setCreditCardNumber}
+        setCreditCardNumber={this.props.setCreditCardNumber}
         setCVV={this.props.setCVV}
         setExpirationDate={this.props.setExpirationDate}
         setFirstName={this.props.setFirstName}
         setLastName={this.props.setLastName}
         setSecretQuestion={this.props.setSecretQuestion}
-        setSecretAnswer={this.props.setSecretQuestion}
+        setSecretAnswer={this.props.setSecretAnswer}
       />
     );
   }
@@ -46,13 +46,13 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = {
-  setCreditCardNumber: setCreditCardNumber,
-  setCVV: setCVV,
-  setExpirationDate: setExpirationDate,
-  setFirstName: setFirstName,
-  setLastName: setLastName,
-  setSecretQuestion: setSecretQuestion,
-  setSecretAnswer: setSecretAnswer,
+  setCreditCardNumber,
+  setCVV,
+  setExpirationDate,
+  setFirstName,
+  setLastName,
+  setSecretQuestion,
+  setSecretAnswer,
 };
 
 export default connect(
